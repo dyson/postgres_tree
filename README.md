@@ -2,7 +2,7 @@
 
 Include PostgresTree::ActiveRecordConcern in your models along with a parent_id field and get access to ancestors and descendents in one query.
 
-[![Build Status](https://travis-ci.org/dyson/postgres_tree.svg?branch=master)](https://travis-ci.org/dyson/postgres_tree) [![Coverage Status](https://img.shields.io/coveralls/dyson/postgres_tree.svg)](https://coveralls.io/r/dyson/postgres_tree?branch=master)
+[![Build Status](https://travis-ci.org/dyson/postgres_tree.svg?branch=master)](https://travis-ci.org/dyson/postgres_tree) [![Coverage Status](https://img.shields.io/coveralls/dyson/postgres_tree.svg)](https://coveralls.io/r/dyson/postgres_tree?branch=master) [![Gem Version](https://badge.fury.io/rb/postgres_tree.svg)](http://badge.fury.io/rb/postgres_tree)
 
 ----
 
