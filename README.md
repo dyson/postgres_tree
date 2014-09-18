@@ -27,7 +27,7 @@ gem 'postgres_tree'
 Or lock it to the current version:
 
 ```ruby
-gem 'postgres_tree', '~> 0.0.1'
+gem 'postgres_tree', '~> 0.0.2'
 ```
 
 ##### Migration

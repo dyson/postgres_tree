@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    postgres_tree (0.0.1)
+    postgres_tree (0.0.2)
       rails (~> 4.0)
 
 GEM
