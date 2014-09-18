@@ -21,7 +21,7 @@ Tested using rails ~> 4.0.0
 Add to your Gemfile:
 
 ```ruby
-gem 'awesome-tree', git: 'https://github.com/dyson/awesome-tree.git', tag: 'v0.0.2'
+gem 'postgres_tree'
 ```
 
 ##### Migration
@@ -45,7 +45,7 @@ end
 ```ruby
 class Role < ActiveRecord::Base
 
-  awesome_treeify
+  include PostgresTree::ActiveRecordConcern
 
   # Associations for tree
   belongs_to :parent, class_name: "Role"
@@ -77,10 +77,10 @@ Using the self referencing belongs and has_many as above, you also get get the p
 
 #### Scopes
 
-A named scope called root is also added to the model to obtain all root records:
+A named scope called tree_roots is also added to the model to obtain all root records:
 
 ```ruby
-root_role = Role.root
+root_roles = Role.tree_roots
 ```
 
 #### Usage example
@@ -238,7 +238,3 @@ NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
 LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
 OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-
-
-
-
