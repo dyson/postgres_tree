@@ -14,5 +14,5 @@ notifications:
     on_success: never
 
 before_script:
-  - cp config/database.yml.travis config/database.yml
+  - cp test/dummy/config/database.yml.travis test/dummy/config/database.yml
   - psql -c 'create database travis_ci_test;' -U postgres
