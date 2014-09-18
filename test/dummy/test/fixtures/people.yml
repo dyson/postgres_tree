@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+grandad:
+  id: 1
+  name: 'Grandad'
+
+dad:
+  id: 2
+  name: 'Dad'
+  parent_id: 1
+
+son:
+  id: 3
+  name: 'Son'
+  parent_id: 2
