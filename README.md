@@ -24,6 +24,12 @@ Add to your Gemfile:
 gem 'postgres_tree'
 ```
 
+Or lock it to the current version:
+
+```ruby
+gem 'postgres_tree', '~> 0.0.1'
+```
+
 ##### Migration
 
 Add a parent_id field to your model via a migration. For example, a roles table:
