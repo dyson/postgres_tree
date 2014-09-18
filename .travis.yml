@@ -12,3 +12,7 @@ notifications:
       - dysonsimmons@gmail.com
     on_failure: change
     on_success: never
+
+before_script:
+  - cp config/database.yml.travis config/database.yml
+  - psql -c 'create database travis_ci_test;' -U postgres
