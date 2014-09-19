@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.email       = ["dysonsimmons@gmail.com"]
   s.homepage    = "https://github.com/dyson/postgres_tree"
   s.summary     = "ActiveRecord tree structures using PostgreSQL"
-  s.description = "Include PostgresTree::ActiveRecordConcern in your models along with a parent_id field and get access to ancestors and descendents in one query."
+  s.description = "Access to an activerecord models ancestors and descendents in one query."
   s.license     = "MIT"
 
   s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.rdoc"]
