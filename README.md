@@ -93,130 +93,33 @@ root_roles = Role.tree_roots
 
 ```ruby
 irb(main):001:0> parent = Role.find 2
-  Role Load (3.7ms)  SELECT "roles".* FROM "roles" WHERE "roles"."id" = $1 LIMIT 1  [["id", 2]]
 => #<Role id: 2, name: "Parent", parent_id: 1>
+
 irb(main):002:0> parent.ancestors
-  Role Load (2.7ms)  SELECT "roles".* FROM "roles" WHERE (roles.id IN ( WITH RECURSIVE search_tree(id, parent_id, path) AS (
- SELECT id, parent_id, ARRAY[id]
- FROM roles
- WHERE id = 2
- UNION ALL
- SELECT roles.id, roles.parent_id, path || roles.id
- FROM search_tree
- JOIN roles ON roles.id = search_tree.parent_id
- WHERE NOT roles.id = ANY(path)
- )
- SELECT id FROM search_tree ORDER BY path DESC
-))
 => [#<Role id: 1, name: "Grandparent", parent_id: nil>]
 
 irb(main):003:0> parent.self_and_ancestors
-  Role Load (1.4ms)  SELECT "roles".* FROM "roles" WHERE (roles.id IN ( WITH RECURSIVE search_tree(id, parent_id, path) AS (
- SELECT id, parent_id, ARRAY[id]
- FROM roles
- WHERE id = 2
- UNION ALL
- SELECT roles.id, roles.parent_id, path || roles.id
- FROM search_tree
- JOIN roles ON roles.id = search_tree.parent_id
- WHERE NOT roles.id = ANY(path)
- )
- SELECT id FROM search_tree ORDER BY path DESC
-))
 => #<ActiveRecord::Relation [#<Role id: 1, name: "Grandparent", parent_id: nil>, #<Role id: 2, name: "Parent", parent_id: 1>]>
 
 irb(main):004:0> parent.descendents
-  Role Load (1.4ms)  SELECT "roles".* FROM "roles" WHERE (roles.id IN ( WITH RECURSIVE search_tree(id, path) AS (
- SELECT id, ARRAY[id]
- FROM roles
- WHERE id = 2
- UNION ALL
- SELECT roles.id, path || roles.id
- FROM search_tree
- JOIN roles ON roles.parent_id = search_tree.id
- WHERE NOT roles.id = ANY(path)
- )
- SELECT id FROM search_tree ORDER BY path
-))
 => [#<Role id: 3, name: "Child", parent_id: 2>]
 
 irb(main):005:0> parent.self_and_descendents
-  Role Load (1.4ms)  SELECT "roles".* FROM "roles" WHERE (roles.id IN ( WITH RECURSIVE search_tree(id, path) AS (
- SELECT id, ARRAY[id]
- FROM roles
- WHERE id = 2
- UNION ALL
- SELECT roles.id, path || roles.id
- FROM search_tree
- JOIN roles ON roles.parent_id = search_tree.id
- WHERE NOT roles.id = ANY(path)
- )
- SELECT id FROM search_tree ORDER BY path
-))
 => #<ActiveRecord::Relation [#<Role id: 2, name: "Parent", parent_id: 1>, #<Role id: 3, name: "Child", parent_id: 2>]>
 
 irb(main):006:0> child = Role.find 3
-  Role Load (0.6ms)  SELECT "roles".* FROM "roles" WHERE "roles"."id" = $1 LIMIT 1  [["id", 3]]
 => #<Role id: 3, name: "Child", parent_id: 2>
 
 irb(main):007:0> parent.descendents_include? child
-  Role Load (0.9ms)  SELECT "roles".* FROM "roles" WHERE (roles.id IN ( WITH RECURSIVE search_tree(id, path) AS (
- SELECT id, ARRAY[id]
- FROM roles
- WHERE id = 2
- UNION ALL
- SELECT roles.id, path || roles.id
- FROM search_tree
- JOIN roles ON roles.parent_id = search_tree.id
- WHERE NOT roles.id = ANY(path)
- )
- SELECT id FROM search_tree ORDER BY path
-))
 => true
 
 irb(main):008:0> parent.self_and_descendents_include? child
-  Role Load (0.9ms)  SELECT "roles".* FROM "roles" WHERE (roles.id IN ( WITH RECURSIVE search_tree(id, path) AS (
- SELECT id, ARRAY[id]
- FROM roles
- WHERE id = 2
- UNION ALL
- SELECT roles.id, path || roles.id
- FROM search_tree
- JOIN roles ON roles.parent_id = search_tree.id
- WHERE NOT roles.id = ANY(path)
- )
- SELECT id FROM search_tree ORDER BY path
-))
 => true
 
 irb(main):009:0> parent.ancestors_include? child
-  Role Load (1.5ms)  SELECT "roles".* FROM "roles" WHERE (roles.id IN ( WITH RECURSIVE search_tree(id, parent_id, path) AS (
- SELECT id, parent_id, ARRAY[id]
- FROM roles
- WHERE id = 2
- UNION ALL
- SELECT roles.id, roles.parent_id, path || roles.id
- FROM search_tree
- JOIN roles ON roles.id = search_tree.parent_id
- WHERE NOT roles.id = ANY(path)
- )
- SELECT id FROM search_tree ORDER BY path DESC
-))
 => false
 
 irb(main):010:0> parent.self_and_ancestors_include? child
-  Role Load (1.5ms)  SELECT "roles".* FROM "roles" WHERE (roles.id IN ( WITH RECURSIVE search_tree(id, parent_id, path) AS (
- SELECT id, parent_id, ARRAY[id]
- FROM roles
- WHERE id = 2
- UNION ALL
- SELECT roles.id, roles.parent_id, path || roles.id
- FROM search_tree
- JOIN roles ON roles.id = search_tree.parent_id
- WHERE NOT roles.id = ANY(path)
- )
- SELECT id FROM search_tree ORDER BY path DESC
-))
 => false
 ```
 
