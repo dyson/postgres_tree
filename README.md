@@ -22,7 +22,7 @@ Add to your Gemfile:
 gem 'postgres_tree'
 ```
 
-Or lock it to the current version:
+Or lock it to the current backwards compatible version:
 
 ```ruby
 gem 'postgres_tree', '~> 0.0.2'
