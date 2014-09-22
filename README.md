@@ -9,10 +9,8 @@ Include PostgresTree::ActiveRecordConcern in your models along with a parent_id 
 #### Requirements
 
 Gems:
-* activerecord
+* rails ~> 4.0
 * pg
-
-Tested using rails ~> 4.0.0
 
 #### Installation
 

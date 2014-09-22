@@ -10,15 +10,15 @@ Gem::Specification.new do |s|
   s.authors     = ["Dyson Simmons"]
   s.email       = ["dysonsimmons@gmail.com"]
   s.homepage    = "https://github.com/dyson/postgres_tree"
-  s.summary     = "ActiveRecord tree structures using PostgreSQL"
-  s.description = "Access to an activerecord models ancestors and descendents in one query."
+  s.summary     = "Rails 4 ActiveRecord tree structures using PostgreSQL"
+  s.description = "Access to Rails 4 ActiveRecord models ancestors and descendents in one query."
   s.license     = "MIT"
 
   s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.rdoc"]
   s.test_files = Dir["test/**/*"]
 
   s.add_dependency "rails", "~> 4.0"
+  s.add_dependency "pg"
 
-  s.add_development_dependency "pg"
   s.add_development_dependency "coveralls"
 end

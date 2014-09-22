@@ -8,32 +8,55 @@ module PostgresTree::ActiveRecordConcern
     scope :tree_roots, -> { where(parent_id: nil) }
   end
 
-  # Ancestors
+  # Get all ancestors
+  #
+  # Example:
+  #   > parent.ancestors
+  #   => [#<Role id: 1, name: "Grandparent", parent_id: nil>]
+
   def ancestors
     self_and_ancestors - [self]
   end
+
+  # Get all ancestors and include self in the returned result
+  #
+  # Example:
+  #   > parent.self_and_ancestors
+  #   => #<ActiveRecord::Relation [#<Role id: 1, name: "Grandparent", parent_id: nil>, #<Role id: 2, name: "Parent", parent_id: 1>]>
+
   def self_and_ancestors
     self_and_ancestors_for(self)
   end
 
-  # Descendents
+  # Get all descendents
+  #
+  # Example:
+  #   > parent.descendents
+  #   => [#<Role id: 3, name: "Child", parent_id: 2>]
+
   def descendents
     self_and_descendents - [self]
   end
+
+  # Get all descendents and include self in the returned result
+  #
+  # Example:
+  #   > parent.self_and_descendents
+  #   => #<ActiveRecord::Relation [#<Role id: 2, name: "Parent", parent_id: 1>, #<Role id: 3, name: "Child", parent_id: 2>]>
+
   def self_and_descendents
     self_and_descendents_for(self)
   end
 
-  # Check if ancestors, self_and_ancestors, descendents or self_and_descendents includes? object
-  def method_missing(method, *args, &block)
-    if method.to_s =~ /\A(.+)_include\?\z/
-      self.send($1.to_sym).include? *args.first
-    else
-      super
-    end
-  end
-
   private
+
+    def method_missing(method, *args, &block)
+      if method.to_s =~ /\A(.+)_include\?\z/
+        self.send($1.to_sym).include? *args.first
+      else
+        super
+      end
+    end
 
     def respond_to_missing?(method, include_private_methods = false)
       method.to_s =~ /\A(.+)_include\?\z/ || super

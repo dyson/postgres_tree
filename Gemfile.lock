@@ -2,6 +2,7 @@ PATH
   remote: .
   specs:
     postgres_tree (0.0.2)
+      pg
       rails (~> 4.0)
 
 GEM
@@ -103,5 +104,4 @@ PLATFORMS
 
 DEPENDENCIES
   coveralls
-  pg
   postgres_tree!
