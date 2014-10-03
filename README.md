@@ -51,7 +51,7 @@ class Role < ActiveRecord::Base
 
   include PostgresTree::ActiveRecordConcern
 
-  # Associations for tree
+  # Add some extra (optional) associations if you want to use them
   belongs_to :parent, class_name: "Role"
   has_many :children, class_name: "Role", foreign_key: 'parent_id'
 
